@@ -1,5 +1,7 @@
 
-# Observable Trends
+# News Mood
+
+## Observable Trends
 
 - Most tweets are concentrated at a polarity of 0, meaning that media sources aim to report in a neutral fashion.
 - Per the data on 06/07/2018, all media sources were overall tweeting negatively.
@@ -189,7 +191,6 @@ sentiments_pd.head()
 
 ```python
 # Reorganize columns
-# source acount, its text, its date, and its compound, positive, neutral, and negative sentiment scores
 sentiments_pd_reorg = sentiments_pd[["Source Account", "Text", "Date", "Compound", "Positive", "Neutral",
                                     "Negative", "Tweets Ago"]]
 sentiments_pd_reorg.head()
@@ -201,6 +202,8 @@ sentiments_pd_reorg.to_csv("output/Twitter_sentiments_news.csv",
 
 
 ```python
+# Create plot
+
 sns.set(style="darkgrid")
 scatter_plot = sns.lmplot(x = "Tweets Ago", y = "Compound", data = sentiments_pd_reorg,
                          hue= "Source Account", palette=dict(BBCWorld="lightcoral", 
@@ -219,7 +222,7 @@ plt.grid(True)
 # Create a legend
 lgnd = plt.legend(fontsize="medium", loc='upper center', bbox_to_anchor=(1.2, 0.8), title="Media Sources")
 
-# Save Figure
+# Save figure
 plt.savefig("output/SentimentAnalysisScatter.png")
 
 # Show plot
@@ -251,6 +254,8 @@ account_compound_mean
 
 
 ```python
+# Create plot
+
 plt.bar(target_users, account_compound_mean, color = ['lightcoral','g','r','b','y'], alpha=1, align="center")
 
 # Tell matplotlib where to place each of the x-axis labels
@@ -263,11 +268,11 @@ plt.xlim(-0.75, len(target_users)-0.25)
 # Set the y-limits
 plt.ylim(min(account_compound_mean)-.025), (max(account_compound_mean)+.05)
 
-# Give our chart some labels and a tile
+# Give our chart some labels and a title
 plt.title(f"Overall Media Sentiment based on Twitter ({now})")
 plt.ylabel("Tweet Polarity")
 
-# Save Figure
+# Save figure
 plt.savefig("output/SentimentAnalysisOverall.png")
 
 # Print our chart to the screen
